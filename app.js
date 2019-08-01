@@ -7,6 +7,7 @@ var urlencodedParser = bodyParser.urlencoded({extended: true})
 
 
 const app = express()
+const port = process.env.PORT || 3000
 app.use(bodyParser.urlencoded({extended: true}))
 const publicDirectoryPath = __dirname
 app.use(express.static(publicDirectoryPath))
@@ -54,6 +55,6 @@ simple()
 
 
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000')
+app.listen(port, () => {
+  console.log('Server is up on port ' + port)
 })
