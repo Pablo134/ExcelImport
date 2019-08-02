@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 const publicDirectoryPath = __dirname
 app.use(express.static(publicDirectoryPath))
 
-app.post('/submit', urlencodedParser, function(req,res){
+app.post('/index', urlencodedParser, function(req,res){
 
   input = req.body.textField
   
@@ -58,11 +58,6 @@ setTimeout(function(){res.download('Excel.xlsx') }, 5000);
 
 simple()
 })
-
-
-
-
-
 
 app.listen(port, () => {
   console.log('Server is up on port ' + port)
