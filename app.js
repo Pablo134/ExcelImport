@@ -26,25 +26,34 @@ console.log(`Passed: ${results.passed}`)
     
 var workbook = new excel.Workbook();
 var worksheet = workbook.addWorksheet('Sheet 1')
+
   
 var n = 1
 var m = 1
+
 for(var i = 0; i < results.links.length; i++){
   console.log('url: ' + results.links[i].url + ' => status: ' + results.links[i].status)
-  worksheet.cell(n,m).link(results.links[i].url)
-  m++
-  if(results.links[i].status !== undefined){
-  worksheet.cell(n,m).number(results.links[i].status)
+  if(results.links[i].status === 404) {
+  worksheet.cell(n,m).link(results.links[i].url).style({font: {color: '#FF0000'}})
+  } else {
+    worksheet.cell(n,m).link(results.links[i].url)
+  }
+  m++ 
+  if(results.links[i].status !== undefined) {
+    if(results.links[i].status === 404) {
+  worksheet.cell(n,m).number(results.links[i].status).style({font: {color: '#FF0000'}})
+  } else {
+    worksheet.cell(n,m).number(results.links[i].status)
+  }
   n++
   m = 1
   } else {
     continue
   }
 } 
-  
 
 workbook.write('Excel.xlsx')
-res.download('Excel.xlsx')
+setTimeout(function(){res.download('Excel.xlsx') }, 5000);
 }
 
 simple()
